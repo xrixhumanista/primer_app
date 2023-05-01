@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tablita para la Regla de Oro</title>
+    <script>
+      function moverEnfoque(e) {
+        var tecla = e.keyCode || e.which;
+        if (tecla == 13) {
+          e.preventDefault();
+          var inputs = document.getElementsByTagName("input");
+          var siguiente = false;
+          for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            if (siguiente) {
+              input.focus();
+              return;
+            }
+            if (input == e.target) {
+              siguiente = true;
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Tablita para aplicar la Regla de Oro</h1>
+    <form method="POST" action="/">
+      <table>
+        {% for titulo, sugerencias in cuadros %}
+          <tr>
+            <td><label for="{{ titulo }}">{{ titulo }}</label></td>
+            <td>
+              <input type="text" name="{{ titulo }}" id="{{ titulo }}" list="{{ titulo }}_sugerencias" onkeypress="moverEnfoque(event)">
+              <datalist id="{{ titulo }}_sugerencias">
+                {% for sugerencia in sugerencias %}
+                  <option value="{{ sugerencia }}">
+                {% endfor %}
+              </datalist>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      <br>
+      <button type="submit">Finalizar</button>
+    </form>
+  </body>
+</html>
+

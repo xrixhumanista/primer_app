@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingrese sus palabras</title>
+</head>
+<body>
+    <h1>Ingrese sus palabras</h1>
+    <form method="POST">
+        <table>
+            {% for titulo, sugerencias in cuadros %}
+            <tr>
+                <td>{{ titulo }}</td>
+                <td>
+                    <input type="text" name="{{ titulo }}" list="{{ titulo }}_sugerencias" value="{{ valores[titulo] }}">
+                    <datalist id="{{ titulo }}_sugerencias">
+                        {% for palabra in sugerencias %}
+                        <option value="{{ palabra }}">
+                        {% endfor %}
+                    </datalist>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>

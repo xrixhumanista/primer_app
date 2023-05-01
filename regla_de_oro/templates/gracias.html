@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Gracias por ingresar tus palabras</title>
+  </head>
+  <body>
+    <h1>Gracias por ingresar tus palabras</h1>
+    <p>Has ingresado las siguientes palabras:</p>
+    <ul>
+      {% for titulo, valor in valores.items() %}
+        <li><strong>{{ titulo }}:</strong> {{ valor }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
